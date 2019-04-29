@@ -19,9 +19,11 @@ else
 			write-host "░" -NoNewline
 			}
 		}
+		$BatteryPercent = $BatteryLevel * 10
+		Write-Host " ($BatteryPercent%)"
 	}
 	function prompt{
-		$(Get-BatteryLevel) + " ADMIN " + $(Get-Location) + ">"
+		$(Get-BatteryLevel) + "ADMIN " + $(Get-Location) + ">"
 	}
 }
 
@@ -30,12 +32,15 @@ set-location script:
 
 . .\Get-NetworkStatistics\Get-NetworkStatistics.ps1
 . .\Launch-PSSession\Launch-PSSession.ps1
-. .\Test-OpenPorts\Test-OpenPorts.ps1
+. .\Test-OpenPorts\Test-OpenPort.ps1
 set-location $home
 
 function RDP-Full {param ([string]$destination) mstsc /v:$destination /f}
 function RDP-Span {param ([string]$destination) mstsc /v:$destination /f /multimon}
 function RDP-Mini {param ([string]$destination) mstsc /v:$destination /w:1152 /h:864}
+Function Connect-ExchangeOnline {
+	New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential (Get-Credential) -Authentication Basic -AllowRedirection
+}
 <#  COMMENTED OUT UNTIL I'VE SET UP VIRTUALBOX!
 function Run-Win2003 {. 'C:\Program Files\Oracle\VirtualBox\VBoxManage.exe' startvm Win2003}
 Function Get-VMs {
