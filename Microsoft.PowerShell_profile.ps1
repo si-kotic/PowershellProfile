@@ -30,6 +30,7 @@ else
 New-PSDrive -PSProvider filesystem -name Script -root "C:\PowerShellScripts"
 set-location script:
 
+Import-Module C:\PowerShellScripts\Manage-VPNs\Manage-VPNs.psm1 -Force
 . .\Get-NetworkStatistics\Get-NetworkStatistics.ps1
 . .\Launch-PSSession\Launch-PSSession.ps1
 . .\Test-OpenPorts\Test-OpenPort.ps1
