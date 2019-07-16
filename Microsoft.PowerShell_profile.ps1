@@ -1,5 +1,6 @@
 ﻿$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 
+
 if (!($currentPrincipal.IsInRole( [Security.Principal.WindowsBuiltInRole]::Administrator )))
     {
         (get-host).UI.RawUI.Backgroundcolor="DarkRed"
@@ -8,20 +9,7 @@ if (!($currentPrincipal.IsInRole( [Security.Principal.WindowsBuiltInRole]::Admin
     }
 else
 {
-	function Get-BatteryLevel {
-		$BatteryLevel = (Get-CimInstance -ClassName Win32_battery).EstimatedChargeRemaining[0] / 10
-	
-		0..10 | ForEach-Object {
-			if ($_ -le $BatteryLevel) {
-				write-host "▓" -NoNewline -ForegroundColor "DarkCyan"
-		}
-		else {
-			write-host "░" -NoNewline
-			}
-		}
-		$BatteryPercent = $BatteryLevel * 10
-		Write-Host " ($BatteryPercent%)"
-	}
+	. C:\PowerShellScripts\Get-BatteryLevel\Get-BatteryLevel.ps1
 	function prompt{
 		$(Get-BatteryLevel) + "ADMIN " + $(Get-Location) + ">"
 	}
