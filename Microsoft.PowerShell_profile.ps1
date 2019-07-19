@@ -1,6 +1,7 @@
 ﻿$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 
 
+. C:\PowerShellScripts\Get-BatteryLevel\Get-BatteryLevel.ps1
 if (!($currentPrincipal.IsInRole( [Security.Principal.WindowsBuiltInRole]::Administrator )))
     {
         (get-host).UI.RawUI.Backgroundcolor="DarkRed"
@@ -9,7 +10,6 @@ if (!($currentPrincipal.IsInRole( [Security.Principal.WindowsBuiltInRole]::Admin
     }
 else
 {
-	. C:\PowerShellScripts\Get-BatteryLevel\Get-BatteryLevel.ps1
 	function prompt{
 		$(Get-BatteryLevel) + "ADMIN " + $(Get-Location) + ">"
 	}
@@ -19,6 +19,7 @@ New-PSDrive -PSProvider filesystem -name Script -root "C:\PowerShellScripts"
 set-location script:
 
 Import-Module C:\PowerShellScripts\Manage-VPNs\Manage-VPNs.psm1 -Force
+Import-Module C:\PowerShellScripts\Manage-WirelessNetworks\Manage-WirelssNetworks.psm1 -Force
 . .\Get-NetworkStatistics\Get-NetworkStatistics.ps1
 . .\Launch-PSSession\Launch-PSSession.ps1
 . .\Test-OpenPorts\Test-OpenPort.ps1
