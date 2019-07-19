@@ -23,6 +23,7 @@ Import-Module C:\PowerShellScripts\Manage-WirelessNetworks\Manage-WirelssNetwork
 . .\Get-NetworkStatistics\Get-NetworkStatistics.ps1
 . .\Launch-PSSession\Launch-PSSession.ps1
 . .\Test-OpenPorts\Test-OpenPort.ps1
+. .\Get-SystemUpTime\Get-SystemUpTime.ps1
 set-location $home
 
 function RDP-Full {param ([string]$destination) mstsc /v:$destination /f}
